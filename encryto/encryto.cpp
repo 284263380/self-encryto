@@ -122,10 +122,9 @@ bool encodeFilter(string& file)
     if(ext!="exe" && ext != "py" && ext != "bat" && ext.at(ext.length()-1)!='_'){
         std::string pathCur1 = current_dir;
         std::string path_src = pathCur1 + "/" + file;
-        int time_start = GetTickCount();
         std::string stdMd5 = MD5File(path_src);
-        int delta = GetTickCount() - time_start;
         std::string path_dest = pathCur1 + "/" + stdMd5 +"."+ext;
+        printf("%s=>%s\n", stdMd5.c_str(),file.c_str());
         AES_CTR_Encrypt(s_buffC, s_buffC, path_src.c_str(), std::string(path_dest + "_").c_str());
         remove(path_src.c_str());
     }
