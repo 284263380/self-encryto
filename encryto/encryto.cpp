@@ -123,6 +123,7 @@ bool encodeFilter(string& file)
         std::string pathCur1 = current_dir;
         std::string path_src = pathCur1 + "/" + file;
         std::string stdMd5 = MD5File(path_src);
+        transform(stdMd5.begin(), stdMd5.end(), stdMd5.begin(), ::tolower);
         std::string path_dest = pathCur1 + "/" + stdMd5 +"."+ext;
         printf("%s=>%s\n", stdMd5.c_str(),file.c_str());
         AES_CTR_Encrypt(s_buffC, s_buffC, path_src.c_str(), std::string(path_dest + "_").c_str());
